@@ -6,10 +6,49 @@ console.log(blogData);
 function App() {
   return (
     <div className="App">
-      You're on your own from here! Follow the deliverables; test things out in
-      the browser as you write your code; and good luck!
+     <Header name={blogData.name}/>
+     <About image={blogData.image} about={blogData.about} />
+     <ArticleList post={blogData.posts}/>
     </div>
   );
+}
+
+function Header(props){
+  return (
+    <header>
+      <h1>{props.name} </h1>
+    </header>
+  )
+}
+
+function About({image="https://via.placeholder.com/215",about}){
+  return(
+    <aside>
+      <img src={image} alt="blog logo"/>
+      <p>{about}</p>
+    </aside>
+  )
+}
+
+function ArticleList(props){
+  
+  const articleList=props.post.map((post)=>{
+  return <Article key={post.id} title={post.title} date={post.date} preview={post.preview}/>;})
+  return(
+    <main>
+      {articleList}
+    </main>
+  )
+}
+
+function Article({title,date="January 1, 1970",preview}){
+  return(
+    <article>
+      <h3>{title}</h3>
+      <small>{date}</small>
+      <p>{preview}</p>
+    </article>
+  )
 }
 
 export default App;
